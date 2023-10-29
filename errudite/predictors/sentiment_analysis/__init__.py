@@ -1,2 +1,0 @@
-from .predictor_bcn import PredictorBCN
-from .predictor_sentiment_analysis import PredictorSA

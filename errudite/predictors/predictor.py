@@ -103,40 +103,40 @@ class Predictor(Registrable):
                     unacceptable_num = 0
                     for i in instances:
                         value = i.get_entry('prediction_PE', self.name).label
-                        if(value == 'Unacceptable'):
+                        if(value == 'Unacceptable' or value == 'Insufficient' or value == 'Not Found'):
                             unacceptable_num += 1
-                            if(value == i.get_entry('groundtruth_PE', self.name).label):
+                            if(i.get_entry('groundtruth_PE', self.name).label in ["Unacceptable","Insufficient","Not Found"]):
                                 unacceptable_pe += 1
                     if (unacceptable_num == 0):
                         self.perform[metric] = 'None'
                     else:
                         self.perform[metric] = unacceptable_pe / unacceptable_num
-                if metric == 'accuracy_PE_Insufficient':
-                    insufficient_pe = 0
-                    insufficient_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_PE', self.name).label
-                        if(value == 'Insufficient'):
-                            insufficient_num += 1
-                            if(value == i.get_entry('groundtruth_PE', self.name).label):
-                                insufficient_pe += 1
-                    if (insufficient_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = insufficient_pe / insufficient_num
-                if metric == 'accuracy_PE_NotFound':
-                    notfound_pe = 0
-                    notfound_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_PE', self.name).label
-                        if(value == 'Not Found'):
-                            notfound_num += 1
-                            if(value == i.get_entry('groundtruth_PE', self.name).label):
-                                notfound_pe += 1
-                    if (notfound_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = notfound_pe / notfound_num
+                # if metric == 'accuracy_PE_Insufficient':
+                #     insufficient_pe = 0
+                #     insufficient_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_PE', self.name).label
+                #         if(value == 'Insufficient'):
+                #             insufficient_num += 1
+                #             if(value == i.get_entry('groundtruth_PE', self.name).label):
+                #                 insufficient_pe += 1
+                #     if (insufficient_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = insufficient_pe / insufficient_num
+                # if metric == 'accuracy_PE_NotFound':
+                #     notfound_pe = 0
+                #     notfound_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_PE', self.name).label
+                #         if(value == 'Not Found'):
+                #             notfound_num += 1
+                #             if(value == i.get_entry('groundtruth_PE', self.name).label):
+                #                 notfound_pe += 1
+                #     if (notfound_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = notfound_pe / notfound_num
                 #KE
                 if metric == 'accuracy_KE_Acceptable':
                     acceptable_ke = 0
@@ -156,40 +156,41 @@ class Predictor(Registrable):
                     unacceptable_num = 0
                     for i in instances:
                         value = i.get_entry('prediction_KE', self.name).label
-                        if(value == 'Unacceptable'):
+                        if(value == 'Unacceptable' or value == 'Insufficient' or value == 'Not Found'):
                             unacceptable_num += 1
-                            if(value == i.get_entry('groundtruth_KE', self.name).label):
+                            if( i.get_entry('groundtruth_KE', self.name).label in ["Unacceptable","Insufficient","Not Found"]):
                                 unacceptable_ke += 1
                     if (unacceptable_num == 0):
                         self.perform[metric] = 'None'
                     else:
                         self.perform[metric] = unacceptable_ke / unacceptable_num
-                if metric == 'accuracy_KE_Insufficient':
-                    insufficient_ke = 0
-                    insufficient_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_KE', self.name).label
-                        if(value == 'Insufficient'):
-                            insufficient_num += 1
-                            if(value == i.get_entry('groundtruth_KE', self.name).label):
-                                insufficient_ke += 1
-                    if (insufficient_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = insufficient_ke / insufficient_num
-                if metric == 'accuracy_KE_NotFound':
-                    notfound_ke = 0
-                    notfound_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_KE', self.name).label
-                        if(value == 'Not Found'):
-                            notfound_num += 1
-                            if(value == i.get_entry('groundtruth_KE', self.name).label):
-                                notfound_ke += 1
-                    if (notfound_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = notfound_ke / notfound_num
+                # if metric == 'accuracy_KE_Insufficient':
+                #     insufficient_ke = 0
+                #     insufficient_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_KE', self.name).label
+                #         if(value == 'Insufficient'):
+                #             insufficient_num += 1
+                #             if(value == i.get_entry('groundtruth_KE', self.name).label):
+                #                 insufficient_ke += 1
+                #     if (insufficient_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = insufficient_ke / insufficient_num
+                # if metric == 'accuracy_KE_NotFound':
+                #     notfound_ke = 0
+                #     notfound_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_KE', self.name).label
+                #         if(value == 'Not Found'):
+                #             notfound_num += 1
+                #             if(value == i.get_entry('groundtruth_KE', self.name).label):
+                #                 notfound_ke += 1
+                #     if (notfound_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = notfound_ke / notfound_num
+                
                 ##LCE
                 if metric == 'accuracy_LCE_Acceptable':
                     acceptable_lce = 0
@@ -209,40 +210,40 @@ class Predictor(Registrable):
                     unacceptable_num = 0
                     for i in instances:
                         value = i.get_entry('prediction_LCE', self.name).label
-                        if(value == 'Unacceptable'):
+                        if(value == 'Unacceptable' or value == 'Not Found' or value == 'Insufficient'):
                             unacceptable_num += 1
-                            if(value == i.get_entry('groundtruth_LCE', self.name).label):
+                            if(i.get_entry('groundtruth_LCE', self.name).label in ["Unacceptable","Insufficient","Not Found"]):
                                 unacceptable_lce += 1
                     if (unacceptable_num == 0):
                         self.perform[metric] = 'None'
                     else:
                         self.perform[metric] = unacceptable_lce / unacceptable_num
-                if metric == 'accuracy_LCE_Insufficient':
-                    insufficient_lce = 0
-                    insufficient_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_LCE', self.name).label
-                        if(value == 'Insufficient'):
-                            insufficient_num += 1
-                            if(value == i.get_entry('groundtruth_LCE', self.name).label):
-                                insufficient_lce += 1
-                    if (insufficient_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = insufficient_lce / insufficient_num
-                if metric == 'accuracy_LCE_NotFound':
-                    notfound_lce = 0
-                    notfound_num = 0
-                    for i in instances:
-                        value = i.get_entry('prediction_KE', self.name).label
-                        if(value == 'Not Found'):
-                            notfound_num += 1
-                            if(value == i.get_entry('groundtruth_LCE', self.name).label):
-                                notfound_lce += 1
-                    if (notfound_num == 0):
-                        self.perform[metric] = 'None'
-                    else:
-                        self.perform[metric] = notfound_lce / notfound_num
+                # if metric == 'accuracy_LCE_Insufficient':
+                #     insufficient_lce = 0
+                #     insufficient_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_LCE', self.name).label
+                #         if(value == 'Insufficient'):
+                #             insufficient_num += 1
+                #             if(value == i.get_entry('groundtruth_LCE', self.name).label):
+                #                 insufficient_lce += 1
+                #     if (insufficient_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = insufficient_lce / insufficient_num
+                # if metric == 'accuracy_LCE_NotFound':
+                #     notfound_lce = 0
+                #     notfound_num = 0
+                #     for i in instances:
+                #         value = i.get_entry('prediction_KE', self.name).label
+                #         if(value == 'Not Found'):
+                #             notfound_num += 1
+                #             if(value == i.get_entry('groundtruth_LCE', self.name).label):
+                #                 notfound_lce += 1
+                #     if (notfound_num == 0):
+                #         self.perform[metric] = 'None'
+                #     else:
+                #         self.perform[metric] = notfound_lce / notfound_num
         else:
             print(n_total)
             print(self.name)
